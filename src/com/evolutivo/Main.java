@@ -1,14 +1,45 @@
 package com.evolutivo;
 
 
-import com.evolutivo.io.CargadorATSP;
-import com.evolutivo.model.Individuo;
+import com.evolutivo.algoritmo.AlgoritmoEvolutivo;
+import com.evolutivo.io.ConfigManager;
 
 import java.io.FileNotFoundException;
-import java.util.Random;
 
 public class Main {
-    public static void imprimir(int[][] m) {
+    public static void main(String[] args) {
+        try {
+            ConfigManager config = new ConfigManager();
+
+            // 1. Extraer y convertir los valores primero
+            String archivoTSP = "assets/br17.atsp";
+            int poblacion = Integer.parseInt(config.getConfig("poblacion"));
+            float probCruce = Float.parseFloat(config.getConfig("probCruce"));
+            float probMutacion = Float.parseFloat(config.getConfig("probMutacion"));
+            int maxGen = Integer.parseInt(config.getConfig("maxGen"));
+
+            AlgoritmoEvolutivo evol = new AlgoritmoEvolutivo(
+                    archivoTSP,
+                    poblacion,
+                    probCruce,
+                    probMutacion,
+                    maxGen
+            );
+
+        } catch (NumberFormatException e) {
+            System.err.println("Error de formato: Revisa que los números en tu archivo config.properties sean correctos.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Ocurrió un error al inicializar el algoritmo: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+    private static void printMatrix(int[][] m) {
         int limit = m.length;
         for (int[] ints : m) {
             for (int j = 0; j < limit; j++) {
@@ -16,19 +47,5 @@ public class Main {
             }
             System.out.println();
         }
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        int [][] m = CargadorATSP.cargar("assets/br17.atsp");
-        int cant_ciudades = m.length;
-        int[] camino = new int[cant_ciudades];
-        Random r = new Random();
-        for (int i = 0; i < cant_ciudades; i++) {
-            camino[i] = r.nextInt(cant_ciudades);
-        }
-        Individuo individuo = new Individuo(camino);
-        individuo.evaluar(m);
-        System.out.println("el costo es: "+individuo.getCosto());
-        System.out.println("el fitness es: "+individuo.getFitness());
     }
 }
