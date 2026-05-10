@@ -1,3 +1,5 @@
+package com.evolutivo.model;
+
 import java.util.Arrays;
 
 public class Individuo {

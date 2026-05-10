@@ -1,3 +1,9 @@
+package com.evolutivo;
+
+
+import com.evolutivo.io.CargadorATSP;
+import com.evolutivo.model.Individuo;
+
 import java.io.FileNotFoundException;
 import java.util.Random;
 
