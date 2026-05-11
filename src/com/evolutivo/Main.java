@@ -18,13 +18,14 @@ public class Main {
             float probMutacion = Float.parseFloat(config.getConfig("probMutacion"));
             int maxGen = Integer.parseInt(config.getConfig("maxGen"));
 
-            AlgoritmoEvolutivo evol = new AlgoritmoEvolutivo(
+            AlgoritmoEvolutivo algoritmoEvolutivo = new AlgoritmoEvolutivo(
                     archivoTSP,
                     poblacion,
                     probCruce,
                     probMutacion,
                     maxGen
             );
+            algoritmoEvolutivo.ejecutar();
 
         } catch (NumberFormatException e) {
             System.err.println("Error de formato: Revisa que los números en tu archivo config.properties sean correctos.");
@@ -34,18 +35,4 @@ public class Main {
         }
     }
 
-
-
-
-
-
-    private static void printMatrix(int[][] m) {
-        int limit = m.length;
-        for (int[] ints : m) {
-            for (int j = 0; j < limit; j++) {
-                System.out.print(ints[j] + " ");
-            }
-            System.out.println();
-        }
-    }
 }
