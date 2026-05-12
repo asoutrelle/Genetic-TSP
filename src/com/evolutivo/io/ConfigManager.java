@@ -19,7 +19,16 @@ public class ConfigManager {
             throw new RuntimeException(e);
         }
     }
-    public String getConfig(String key) {
-        return propiedades.getProperty(key);
+    public int getPoblacion(){
+        return Integer.parseInt(propiedades.getProperty("poblacion"));
+    }
+    public float getProbCruce(){
+        return Float.parseFloat(propiedades.getProperty("probCruce"));
+    }
+    public int getMaxGen(){
+        return Integer.parseInt(propiedades.getProperty("maxGen"));
+    }
+    public float getProbMutacion(){
+        return Float.parseFloat(propiedades.getProperty("probMutacion"));
     }
 }
