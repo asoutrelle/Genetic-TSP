@@ -4,28 +4,11 @@ package com.evolutivo;
 import com.evolutivo.algoritmo.AlgoritmoEvolutivo;
 import com.evolutivo.io.ConfigManager;
 
-import java.io.FileNotFoundException;
-
 public class Main {
     public static void main(String[] args) {
         try {
-            ConfigManager config = new ConfigManager();
-
-            // 1. Extraer y convertir los valores primero
-            String archivoTSP = "assets/br17.atsp";
-            int poblacion = Integer.parseInt(config.getConfig("poblacion"));
-            float probCruce = Float.parseFloat(config.getConfig("probCruce"));
-            float probMutacion = Float.parseFloat(config.getConfig("probMutacion"));
-            int maxGen = Integer.parseInt(config.getConfig("maxGen"));
-
-            AlgoritmoEvolutivo algoritmoEvolutivo = new AlgoritmoEvolutivo(
-                    archivoTSP,
-                    poblacion,
-                    probCruce,
-                    probMutacion,
-                    maxGen
-            );
-            algoritmoEvolutivo.ejecutar();
+            AlgoritmoEvolutivo algoritmoEvolutivo = getAlgoritmoEvolutivo(args[0]);
+            algoritmoEvolutivo.ejecutar("outputResultados.txt");
 
         } catch (NumberFormatException e) {
             System.err.println("Error de formato: Revisa que los números en tu archivo config.properties sean correctos.");
@@ -35,4 +18,20 @@ public class Main {
         }
     }
 
+    private static AlgoritmoEvolutivo getAlgoritmoEvolutivo(String ruta) {
+        ConfigManager config = new ConfigManager();
+
+        int poblacion = config.getPoblacion();
+        float probCruce = config.getProbCruce();
+        float probMutacion = config.getProbMutacion();
+        int maxGen = config.getMaxGen();
+
+        return new AlgoritmoEvolutivo(
+                ruta,
+                poblacion,
+                probCruce,
+                probMutacion,
+                maxGen
+        );
+    }
 }

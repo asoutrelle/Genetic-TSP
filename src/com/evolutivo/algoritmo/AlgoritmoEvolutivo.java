@@ -10,10 +10,10 @@ import java.util.*;
 
 public class AlgoritmoEvolutivo {
     private final int[][] matrix;
-    private int tamPoblacion;
-    private int maxGen;
-    private float probCruce;
-    private float probMutacion;
+    private final int tamPoblacion;
+    private final int maxGen;
+    private final float probCruce;
+    private final float probMutacion;
     private Poblacion poblacionActual;
 
     public AlgoritmoEvolutivo(String ruta, int tamPoblacion, float probCruce, float probMutacion, int maxGen) {
@@ -86,8 +86,8 @@ public class AlgoritmoEvolutivo {
         FileManager.guardarResultados(nombreArchivoSalida, tamPoblacion, probCruce, probMutacion, maxGen, tiempoTotal, mejorGlobal.getCosto(), mejorGlobal.getRuta(), historicoCostos);
     }
 
-    private void iniciarPoblacion(){
-        for(int i = 0; i < tamPoblacion; i++){
+    private void iniciarPoblacion() {
+        for(int i = 0; i < tamPoblacion; i++) {
             poblacionActual.add(crearIndividuo());
         }
     }
