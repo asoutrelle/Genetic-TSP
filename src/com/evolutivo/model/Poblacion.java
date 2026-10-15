@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@SuppressWarnings("checkstyle:RegexpSingleline")
+
 public class Poblacion {
     private ArrayList<Individuo> individuos;
     public Poblacion() {
